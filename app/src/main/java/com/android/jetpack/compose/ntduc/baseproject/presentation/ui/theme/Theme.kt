@@ -1,4 +1,4 @@
-package com.android.jetpack.compose.ntduc.baseproject.ui.theme
+package com.android.jetpack.compose.ntduc.baseproject.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
