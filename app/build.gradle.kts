@@ -81,7 +81,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    //Hilt: https://dagger.dev/hilt/
+    // Hilt: https://dagger.dev/hilt/
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
@@ -93,7 +93,12 @@ dependencies {
     testImplementation(libs.hilt.android.testing)
     kspTest(libs.hilt.compiler)
 
-//    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
-//    ksp("androidx.hilt:hilt-compiler:1.2.0")
-//    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    // Retrofit: https://github.com/square/retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+
+    // Okhttp: https://square.github.io/okhttp/
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
 }
