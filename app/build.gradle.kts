@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.android.jetpack.compose.ntduc.baseproject"
+    namespace = "com.android.jetpack.compose.ntduc.weather"
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
-        applicationId = "com.android.jetpack.compose.ntduc.baseproject"
+        applicationId = "com.android.jetpack.compose.ntduc.weather"
 
         minSdk = libs.versions.minSdkVersion.get().toInt()
         targetSdk = libs.versions.targetSdkVersion.get().toInt()
@@ -27,7 +27,7 @@ android {
         val date = SimpleDateFormat("dd.MM.yyyy").format(Date())
         val hour = SimpleDateFormat("HH").format(Date())
         val minutes = SimpleDateFormat("mm").format(Date())
-        base.archivesName = "Base_Project_V${versionName}_${date}_${hour}h${minutes}"
+        base.archivesName = "Weather_App_V${versionName}_${date}_${hour}h${minutes}"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
