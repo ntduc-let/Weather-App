@@ -20,8 +20,6 @@ fun WeatherDataDisplay(
     unit: String,
     icon: ImageVector,
     modifier: Modifier = Modifier,
-    textStyle: TextStyle = TextStyle(),
-    iconTint: Color = Color.White
 ) {
     Row(
         modifier = modifier,
@@ -30,13 +28,11 @@ fun WeatherDataDisplay(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = iconTint,
             modifier = Modifier.size(25.dp)
         )
         Spacer(modifier = Modifier.width(4.dp))
         Text(
             text = "$value$unit",
-            style = textStyle
         )
     }
 }
