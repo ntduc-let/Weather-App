@@ -28,7 +28,7 @@ fun WeatherDataDisplay(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            modifier = Modifier.size(25.dp)
+            modifier = Modifier.size(25.dp),
         )
         Spacer(modifier = Modifier.width(4.dp))
         Text(
