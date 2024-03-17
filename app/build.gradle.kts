@@ -106,5 +106,16 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
 
+    // Location
     implementation(libs.play.services.location)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics.ktx)
+    implementation(libs.firebase.analytics.ktx)
+    implementation(libs.firebase.perf.ktx)
+    implementation(libs.firebase.config.ktx)
+    implementation(libs.firebase.messaging.ktx)
+//    implementation(libs.firebase.database.ktx)
+//    implementation(libs.firebase.auth.ktx)
 }

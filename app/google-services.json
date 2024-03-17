@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "263317206031",
+    "project_id": "jetpack-compose-project-b6666",
+    "storage_bucket": "jetpack-compose-project-b6666.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263317206031:android:c2c4019a067cb80e0f1f7a",
+        "android_client_info": {
+          "package_name": "com.android.jetpack.compose.ntduc.weather"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKM3wf8q7N8ZfD_2gKS1dALHlptjzpw_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
