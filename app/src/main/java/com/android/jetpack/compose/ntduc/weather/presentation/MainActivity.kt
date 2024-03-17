@@ -8,10 +8,11 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -38,12 +39,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        permissionLauncher.launch(
-            arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-            )
-        )
+
+        requestLocationPermission()
 
         setContent {
             WeatherAppTheme(darkTheme = true) {
@@ -51,15 +48,14 @@ class MainActivity : ComponentActivity() {
                     Box(
                         modifier = Modifier.fillMaxSize()
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                        ) {
-                            WeatherCard(
-                                state = viewModel.state,
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            WeatherForecast(state = viewModel.state)
+                        LazyColumn {
+                            item {
+                                WeatherCard(
+                                    state = viewModel.state,
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                WeatherForecast(state = viewModel.state)
+                            }
                         }
                         if (viewModel.state.isLoading) {
                             CircularProgressIndicator(
@@ -78,5 +74,14 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private fun requestLocationPermission() {
+        permissionLauncher.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+            )
+        )
     }
 }

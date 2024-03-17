@@ -5,6 +5,7 @@ import com.android.jetpack.compose.ntduc.weather.data.remote.WeatherDto
 import com.android.jetpack.compose.ntduc.weather.domain.weather.WeatherData
 import com.android.jetpack.compose.ntduc.weather.domain.weather.WeatherInfo
 import com.android.jetpack.compose.ntduc.weather.domain.weather.WeatherType
+import com.android.jetpack.compose.ntduc.weather.domain.weather.WeatherUnit
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -31,10 +32,10 @@ fun WeatherDataDto.toWeatherDataMap(): Map<Int, List<WeatherData>> {
                 weatherType = WeatherType.fromWMO(weatherCode)
             )
         )
-    }.groupBy {
-        it.index / 24
-    }.mapValues {
-        it.value.map { it.data }
+    }.groupBy { indexedWeatherData ->
+        indexedWeatherData.index / 24
+    }.mapValues { map ->
+        map.value.map { indexedWeatherData -> indexedWeatherData.data }
     }
 }
 
@@ -45,8 +46,17 @@ fun WeatherDto.toWeatherInfo(): WeatherInfo {
         val hour = if (now.minute < 30) now.hour else now.hour + 1
         it.time.hour == hour
     }
+    val weatherUnit = WeatherUnit(
+        time = weatherUnit.time,
+        temperature = weatherUnit.temperature,
+        humidity = weatherUnit.humidity,
+        pressure = weatherUnit.pressure,
+        windSpeed = weatherUnit.windSpeed,
+        weatherCode = weatherUnit.weatherCode
+    )
     return WeatherInfo(
         weatherDataPerDay = weatherDataMap,
-        currentWeatherData = currentWeatherData
+        currentWeatherData = currentWeatherData,
+        weatherUnit = weatherUnit
     )
 }

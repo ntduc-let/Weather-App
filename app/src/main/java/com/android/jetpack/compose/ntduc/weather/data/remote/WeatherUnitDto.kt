@@ -2,17 +2,17 @@ package com.android.jetpack.compose.ntduc.weather.data.remote
 
 import com.squareup.moshi.Json
 
-data class WeatherDataDto(
+data class WeatherUnitDto(
     @field:Json(name = "time")
-    val time: List<String>,
+    val time: String,
     @field:Json(name = "temperature_2m")
-    val temperatures: List<Double>,
+    val temperature: String,
     @field:Json(name = "relative_humidity_2m")
-    val humidities: List<Double>,
+    val humidity: String,
     @field:Json(name = "pressure_msl")
-    val pressures: List<Double>,
+    val pressure: String,
     @field:Json(name = "windspeed_10m")
-    val windSpeeds: List<Double>,
+    val windSpeed: String,
     @field:Json(name = "weathercode")
-    val weatherCodes: List<Int>,
+    val weatherCode: String,
 )

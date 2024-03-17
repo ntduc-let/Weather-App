@@ -14,14 +14,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.BlendMode
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.android.jetpack.compose.ntduc.weather.R
@@ -33,7 +29,10 @@ fun WeatherCard(
     state: WeatherState,
     modifier: Modifier = Modifier
 ) {
-    state.weatherInfo?.currentWeatherData?.let { data ->
+    state.weatherInfo?.let { weatherInfo ->
+        val data = weatherInfo.currentWeatherData ?: return@let
+        val unit = weatherInfo.weatherUnit ?: return@let
+
         Card(
             modifier = modifier
                 .padding(16.dp)
@@ -45,7 +44,7 @@ fun WeatherCard(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Today ${data.time.format(DateTimeFormatter.ofPattern("HH:mm"))}",
+                    text = String.format(stringResource(R.string.today_s), data.time.format(DateTimeFormatter.ofPattern("HH:mm"))),
                     modifier = Modifier.align(Alignment.End),
                 )
                 Spacer(modifier = Modifier.height(16.dp))
@@ -56,7 +55,7 @@ fun WeatherCard(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "${data.temperatureCelsius}°C",
+                    text = "${data.temperatureCelsius}${unit.temperature}",
                     fontSize = 50.sp,
                 )
                 Spacer(modifier = Modifier.height(16.dp))
@@ -71,17 +70,17 @@ fun WeatherCard(
                 ) {
                     WeatherDataDisplay(
                         value = data.pressure.roundToInt(),
-                        unit = "hpa",
+                        unit = unit.pressure,
                         icon = ImageVector.vectorResource(id = R.drawable.ic_pressure),
                     )
                     WeatherDataDisplay(
                         value = data.humidity.roundToInt(),
-                        unit = "%",
+                        unit = unit.humidity,
                         icon = ImageVector.vectorResource(id = R.drawable.ic_drop),
                     )
                     WeatherDataDisplay(
                         value = data.windSpeed.roundToInt(),
-                        unit = "km/h",
+                        unit = unit.windSpeed,
                         icon = ImageVector.vectorResource(id = R.drawable.ic_wind),
                     )
                 }
