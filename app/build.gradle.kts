@@ -37,12 +37,38 @@ android {
         multiDexEnabled = true
     }
 
+    signingConfigs {
+        val keyAlias = "weather_app"
+        val keyPassword = "Let22042000"
+        val keystoreFile = file("weather_app_keystore.jks")
+        val storePassword = "Let22042000"
+
+        getByName("debug") {
+            this.keyAlias = keyAlias
+            this.keyPassword = keyPassword
+            this.storeFile = keystoreFile
+            this.storePassword = storePassword
+        }
+
+        create("release") {
+            this.keyAlias = keyAlias
+            this.keyPassword = keyPassword
+            this.storeFile = keystoreFile
+            this.storePassword = storePassword
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig = signingConfigs.getByName("debug")
+        }
+
         release {
             isMinifyEnabled = true
             isShrinkResources = true
 
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
