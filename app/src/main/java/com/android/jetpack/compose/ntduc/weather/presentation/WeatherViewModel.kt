@@ -1,10 +1,12 @@
 package com.android.jetpack.compose.ntduc.weather.presentation
 
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.android.jetpack.compose.ntduc.weather.R
 import com.android.jetpack.compose.ntduc.weather.domain.location.LocationTracker
 import com.android.jetpack.compose.ntduc.weather.domain.repository.WeatherRepository
 import com.android.jetpack.compose.ntduc.weather.domain.util.Resource
@@ -21,7 +23,7 @@ class WeatherViewModel @Inject constructor(
     var state by mutableStateOf(WeatherState())
         private set
 
-    fun loadWeatherInfo() {
+    fun loadWeatherInfo(context: Context) {
         viewModelScope.launch {
             state = state.copy(
                 isLoading = true,
@@ -48,7 +50,7 @@ class WeatherViewModel @Inject constructor(
             } ?: run {
                 state = state.copy(
                     isLoading = false,
-                    error = "Couldn't retrieve location. Make sure to grant permission and enable GPS."
+                    error = context.getString(R.string.couldn_t_retrieve_location_make_sure_to_grant_permission_and_enable_gps)
                 )
             }
         }

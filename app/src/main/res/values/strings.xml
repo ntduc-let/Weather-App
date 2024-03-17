@@ -27,4 +27,5 @@
     <string name="moderate_thunderstorm">Moderate thunderstorm</string>
     <string name="thunderstorm_with_slight_hail">Thunderstorm with slight hail</string>
     <string name="thunderstorm_with_heavy_hail">Thunderstorm with heavy hail</string>
+    <string name="couldn_t_retrieve_location_make_sure_to_grant_permission_and_enable_gps">Couldn\'t retrieve location. Make sure to grant permission and enable GPS.</string>
 </resources>
