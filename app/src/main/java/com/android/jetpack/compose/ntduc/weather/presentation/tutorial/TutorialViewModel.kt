@@ -19,17 +19,23 @@ class TutorialViewModel @Inject constructor() : ViewModel() {
                 when (state.value.currentTutorial.step) {
                     Tutorial.BeginTutorial.step -> _state.value = state.value.copy(
                         currentTutorial = Tutorial.FirstTutorial,
-                        showOpenLinkPolicy = false
+                        showOpenLinkPolicy = true,
+                        requestLocationPermission = false,
+                        requestNotificationPermission = false,
                     )
 
                     Tutorial.FirstTutorial.step -> _state.value = state.value.copy(
                         currentTutorial = Tutorial.SecondTutorial,
-                        showOpenLinkPolicy = true
+                        showOpenLinkPolicy = false,
+                        requestLocationPermission = true,
+                        requestNotificationPermission = false,
                     )
 
                     Tutorial.SecondTutorial.step -> _state.value = state.value.copy(
                         currentTutorial = Tutorial.ThirdTutorial,
-                        showOpenLinkPolicy = false
+                        showOpenLinkPolicy = false,
+                        requestLocationPermission = false,
+                        requestNotificationPermission = true,
                     )
 
                     Tutorial.ThirdTutorial.step -> {

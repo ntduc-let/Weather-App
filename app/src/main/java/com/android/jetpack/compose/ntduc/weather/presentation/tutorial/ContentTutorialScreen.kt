@@ -1,6 +1,8 @@
 package com.android.jetpack.compose.ntduc.weather.presentation.tutorial
 
+import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ContentTutorialScreen(viewModel: TutorialViewModel, modifier: Modifier) {
+fun ContentTutorialScreen(viewModel: TutorialViewModel, modifier: Modifier, onRequestLocationPermission: () -> Unit, onRequestNotificationPermission: () -> Unit) {
     Card(
         shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
         modifier = modifier,
@@ -70,7 +72,13 @@ fun ContentTutorialScreen(viewModel: TutorialViewModel, modifier: Modifier) {
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = 16.dp)
+                    .clickable {
+                        if (viewModel.state.value.showOpenLinkPolicy) {
+                            Log.d("ntduc-debug", "Show Policy")
+                            //TODO
+                        }
+                    },
             )
             Spacer(modifier = Modifier.height(32.dp))
             Button(

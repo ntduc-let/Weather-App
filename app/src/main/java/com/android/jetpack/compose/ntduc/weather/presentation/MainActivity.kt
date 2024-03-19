@@ -1,6 +1,7 @@
 package com.android.jetpack.compose.ntduc.weather.presentation
 
 import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
     private val weatherVM: WeatherViewModel by viewModels()
     private val tutorialVM: TutorialViewModel by viewModels()
 
-    private val permissionLauncher: ActivityResultLauncher<Array<String>> by lazy {
+    private val locationPermissionLauncher: ActivityResultLauncher<Array<String>> by lazy {
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) {
@@ -36,10 +37,17 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private val notificationPermissionLauncher: ActivityResultLauncher<Array<String>> by lazy {
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) {
+            //Nothing
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        requestLocationPermission()
 
         setContent {
             WeatherAppTheme(darkTheme = true) {
@@ -51,7 +59,16 @@ class MainActivity : ComponentActivity() {
                         startDestination = if (tutorialVM.state.value.isShowTutorial) Screen.TutorialScreen.route else Screen.WeatherHomeScreen.route
                     ) {
                         composable(route = Screen.TutorialScreen.route) {
-                            TutorialScreen(viewModel = tutorialVM, modifier = Modifier.fillMaxSize())
+                            TutorialScreen(
+                                viewModel = tutorialVM,
+                                modifier = Modifier.fillMaxSize(),
+                                onRequestLocationPermission = {
+                                    requestLocationPermission()
+                                },
+                                onRequestNotificationPermission = {
+                                    requestNotificationPermission()
+                                }
+                            )
                         }
 
                         composable(route = Screen.WeatherHomeScreen.route) {
@@ -64,11 +81,22 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun requestLocationPermission() {
-        permissionLauncher.launch(
+        locationPermissionLauncher.launch(
             arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
             )
         )
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            notificationPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.POST_NOTIFICATIONS,
+                )
+            )
+        }
+
     }
 }

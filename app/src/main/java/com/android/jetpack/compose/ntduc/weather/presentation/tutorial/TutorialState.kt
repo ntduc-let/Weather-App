@@ -6,7 +6,9 @@ import com.orhanobut.hawk.Hawk
 data class TutorialState(
     val isShowTutorial: Boolean = Hawk.get(IS_SHOW_TUTORIAL, true),
     val currentTutorial: Tutorial = Tutorial.BeginTutorial,
-    val showOpenLinkPolicy: Boolean = false
+    val showOpenLinkPolicy: Boolean = false,
+    val requestLocationPermission: Boolean = false,
+    val requestNotificationPermission: Boolean = false
 ) {
     companion object {
         private const val IS_SHOW_TUTORIAL = "IS_SHOW_TUTORIAL"
