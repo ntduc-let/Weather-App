@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.android.jetpack.compose.ntduc.weather.presentation.tutorial.TutorialEvent
 import com.android.jetpack.compose.ntduc.weather.presentation.tutorial.TutorialScreen
 import com.android.jetpack.compose.ntduc.weather.presentation.tutorial.TutorialViewModel
 import com.android.jetpack.compose.ntduc.weather.presentation.util.Screen
@@ -29,25 +30,25 @@ class MainActivity : ComponentActivity() {
     private val weatherVM: WeatherViewModel by viewModels()
     private val tutorialVM: TutorialViewModel by viewModels()
 
-    private val locationPermissionLauncher: ActivityResultLauncher<Array<String>> by lazy {
-        registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) {
-            weatherVM.loadWeatherInfo(this)
-        }
-    }
+    private lateinit var locationPermissionLauncher: ActivityResultLauncher<Array<String>>
 
-    private val notificationPermissionLauncher: ActivityResultLauncher<Array<String>> by lazy {
-        registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) {
-            //Nothing
-        }
-    }
+    private lateinit var notificationPermissionLauncher: ActivityResultLauncher<Array<String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        locationPermissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) {
+            tutorialVM.onEvent(TutorialEvent.NextTutorial)
+            weatherVM.loadWeatherInfo(this)
+        }
+
+        notificationPermissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) {
+            tutorialVM.onEvent(TutorialEvent.NextTutorial)
+        }
 
         setContent {
             WeatherAppTheme(darkTheme = true) {
@@ -96,7 +97,8 @@ class MainActivity : ComponentActivity() {
                     Manifest.permission.POST_NOTIFICATIONS,
                 )
             )
+        } else {
+            tutorialVM.onEvent(TutorialEvent.NextTutorial)
         }
-
     }
 }

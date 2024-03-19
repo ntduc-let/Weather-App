@@ -1,8 +1,6 @@
 package com.android.jetpack.compose.ntduc.weather.presentation.tutorial
 
-import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.android.jetpack.compose.ntduc.weather.domain.tutorial.TutorialAction
 
 @Composable
 fun ContentTutorialScreen(viewModel: TutorialViewModel, modifier: Modifier, onRequestLocationPermission: () -> Unit, onRequestNotificationPermission: () -> Unit) {
@@ -37,20 +36,21 @@ fun ContentTutorialScreen(viewModel: TutorialViewModel, modifier: Modifier, onRe
         shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
         modifier = modifier,
     ) {
+        val currentTutorial = viewModel.state.value.currentTutorial
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.fillMaxSize()
         ) {
             Image(
-                painter = painterResource(id = viewModel.state.value.currentTutorial.iconRes),
+                painter = painterResource(id = currentTutorial.iconRes),
                 contentDescription = null,
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .size(56.dp)
             )
             Text(
-                text = stringResource(id = viewModel.state.value.currentTutorial.desTitleRes),
+                text = stringResource(id = currentTutorial.desTitleRes),
                 textAlign = TextAlign.Center,
                 fontSize = 12.sp,
                 modifier = Modifier
@@ -58,7 +58,7 @@ fun ContentTutorialScreen(viewModel: TutorialViewModel, modifier: Modifier, onRe
                     .padding(horizontal = 16.dp),
             )
             Text(
-                text = stringResource(id = viewModel.state.value.currentTutorial.titleContentRes),
+                text = stringResource(id = currentTutorial.titleContentRes),
                 textAlign = TextAlign.Center,
                 fontSize = 24.sp,
                 color = Color.White,
@@ -68,17 +68,11 @@ fun ContentTutorialScreen(viewModel: TutorialViewModel, modifier: Modifier, onRe
                     .padding(horizontal = 16.dp),
             )
             Text(
-                text = stringResource(id = viewModel.state.value.currentTutorial.desContentRes),
+                text = stringResource(id = currentTutorial.desContentRes),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
-                    .clickable {
-                        if (viewModel.state.value.showOpenLinkPolicy) {
-                            Log.d("ntduc-debug", "Show Policy")
-                            //TODO
-                        }
-                    },
             )
             Spacer(modifier = Modifier.height(32.dp))
             Button(
@@ -87,7 +81,11 @@ fun ContentTutorialScreen(viewModel: TutorialViewModel, modifier: Modifier, onRe
                     .wrapContentHeight()
                     .padding(16.dp),
                 onClick = {
-                    viewModel.onEvent(TutorialEvent.NextTutorial)
+                    when (currentTutorial.action) {
+                        TutorialAction.TutorialActionNext -> viewModel.onEvent(TutorialEvent.NextTutorial)
+                        TutorialAction.TutorialActionRequestLocationPermission -> onRequestLocationPermission.invoke()
+                        TutorialAction.TutorialActionRequestNotificationPermission -> onRequestNotificationPermission.invoke()
+                    }
                 }
             ) {
                 Box(modifier = Modifier.fillMaxWidth()) {
