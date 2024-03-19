@@ -7,28 +7,32 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.android.jetpack.compose.ntduc.weather.presentation.ui.theme.WeatherAppTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.android.jetpack.compose.ntduc.weather.presentation.tutorial.TutorialScreen
+import com.android.jetpack.compose.ntduc.weather.presentation.tutorial.TutorialViewModel
+import com.android.jetpack.compose.ntduc.weather.presentation.util.Screen
+import com.android.jetpack.compose.ntduc.weather.presentation.weather_home.WeatherHomeScreen
+import com.android.jetpack.compose.ntduc.weather.presentation.weather_home.WeatherViewModel
+import com.android.jetpack.compose.ntduc.weather.ui.theme.WeatherAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: WeatherViewModel by viewModels()
+    private val weatherVM: WeatherViewModel by viewModels()
+    private val tutorialVM: TutorialViewModel by viewModels()
+
     private val permissionLauncher: ActivityResultLauncher<Array<String>> by lazy {
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) {
-            viewModel.loadWeatherInfo(this)
+            weatherVM.loadWeatherInfo(this)
         }
     }
 
@@ -40,23 +44,18 @@ class MainActivity : ComponentActivity() {
         setContent {
             WeatherAppTheme(darkTheme = true) {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Box(
-                        modifier = Modifier.fillMaxSize()
+                    val navController = rememberNavController()
+
+                    NavHost(
+                        navController = navController,
+                        startDestination = if (tutorialVM.state.value.isShowTutorial) Screen.TutorialScreen.route else Screen.WeatherHomeScreen.route
                     ) {
-                        LazyColumn {
-                            item {
-                                WeatherCard(
-                                    state = viewModel.state,
-                                )
-                                Spacer(modifier = Modifier.height(16.dp))
-                                WeatherForecast(state = viewModel.state)
-                            }
+                        composable(route = Screen.TutorialScreen.route) {
+                            TutorialScreen(viewModel = tutorialVM, modifier = Modifier.fillMaxSize())
                         }
-                        if (viewModel.state.isLoading) {
-                            WeatherLoading(modifier = Modifier.align(Alignment.Center))
-                        }
-                        viewModel.state.error?.let { error ->
-                            WeatherError(error = error, modifier = Modifier.align(Alignment.Center))
+
+                        composable(route = Screen.WeatherHomeScreen.route) {
+                            WeatherHomeScreen(viewModel = weatherVM, modifier = Modifier.fillMaxSize())
                         }
                     }
                 }

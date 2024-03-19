@@ -1,6 +1,8 @@
 [versions]
 compileSdkVersion = "34"
+hawk = "2.0.1"
 minSdkVersion = "24"
+navigationCompose = "2.7.7"
 targetSdkVersion = "34"
 
 agp = "8.3.0"
@@ -22,7 +24,9 @@ firebase-bom = "32.7.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
+hawk = { module = "com.orhanobut:hawk", version.ref = "hawk" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltAndroid" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }

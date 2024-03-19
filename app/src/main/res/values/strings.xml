@@ -29,9 +29,23 @@
     <string name="thunderstorm_with_heavy_hail">Thunderstorm with heavy hail</string>
     <string name="couldn_t_retrieve_location_make_sure_to_grant_permission_and_enable_gps">Couldn\'t retrieve location. Make sure to grant permission and enable GPS.</string>
     <string name="couldn_t_retrieve_location_make_sure_to_grant_location_permissions">Couldn\'t retrieve location. Make sure to grant location permissions</string>
-
     <string name="today_s">Today - %s</string>
     <string name="hourly_forecast">Hourly forecast</string>
     <string name="couldn_t_retrieve_location_make_sure_gps_is_turned_on">Couldn\'t retrieve location. Make sure GPS is turned on.</string>
     <string name="an_error_occurred_please_try_again">An error occurred. Please try again</string>
+    <string name="welcome">WELCOME</string>
+    <string name="come_in_the_weather_is">Come in,\nthe Weather is…</string>
+    <string name="get_your_weather_information_when_and_how_you_want_it_wherever_you_are_with_hyper_local_forecasts_advanced_radar_and_severe_weather_alerts_we_make_life_safer_easier_and_better_start_your_setup_in_3_easy_steps">Get your weather information when and how you want it - wherever you are. With hyper-local forecasts, advanced radar, and severe weather alerts, we make life safer, easier, and better.\n\nStart your setup in 3 easy steps.</string>
+    <string name="get_started">Get Started</string>
+    <string name="terms_privacy"><![CDATA[TERMS & PRIVACY]]></string>
+    <string name="stay_updated_stay_safe">Stay Updated.\nStay Safe.</string>
+    <string name="agree_and_continue">Agree and Continue</string>
+    <string name="location_permissions">LOCATION PERMISSIONS</string>
+    <string name="get_hyper_local_forecasts_wherever_you_are">Get Hyper-Local Forecasts, Wherever You Are</string>
+    <string name="enable_location_services_to_receive_hyper_accurate_forecasts_severe_weather_alerts_news_and_stories_up_to_the_minute_you_can_change_permissions_at_any_time">Enable location services to receive hyper-accurate forecasts, severe weather alerts, news, and stories - up to the minute. You can change permissions at any time.</string>
+    <string name="next">Next</string>
+    <string name="notifications">NOTIFICATIONS</string>
+    <string name="stay_ahead_the_storm">Stay Ahead the Storm</string>
+    <string name="turn_on_notifications_to_receive_severe_weather_alerts_and_breaking_news_for_your_saved_locations_so_you_re_always_prepared">Turn on notifications to receive severe weather alerts and breaking news for your saved locations - so you\'re always prepared</string>
+    <string name="we_take_tour_privacy_very_seriously_tap_the_arrow_below_to_agree_to_our_terms_of_use_and_privacy_policy_which_will_allow_you_ti_safely_enjoy_the_weather_app">We take tour privacy very seriously. Tap the arrow below to agree to our Terms of Use and Privacy Policy, which will allow you ti safely enjoy the Weather App</string>
 </resources>

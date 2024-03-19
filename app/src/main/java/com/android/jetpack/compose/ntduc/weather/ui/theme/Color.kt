@@ -1,4 +1,4 @@
-package com.android.jetpack.compose.ntduc.weather.presentation.ui.theme
+package com.android.jetpack.compose.ntduc.weather.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

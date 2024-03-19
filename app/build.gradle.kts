@@ -144,4 +144,10 @@ dependencies {
     implementation(libs.firebase.messaging.ktx)
 //    implementation(libs.firebase.database.ktx)
 //    implementation(libs.firebase.auth.ktx)
+
+    // Navigation: https://developer.android.com/jetpack/compose/navigation
+    implementation(libs.androidx.navigation.compose)
+
+    // Hawk: https://github.com/orhanobut/hawk
+    implementation(libs.hawk)
 }

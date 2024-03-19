@@ -1,4 +1,4 @@
-package com.android.jetpack.compose.ntduc.weather.presentation
+package com.android.jetpack.compose.ntduc.weather.presentation.weather_home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
