@@ -29,29 +29,32 @@ class WeatherViewModel @Inject constructor(
                 isLoading = true,
                 error = null
             )
-            locationTracker.getCurrentLocation()?.let { location ->
-                when (val result = repository.getWeatherData(location.latitude, location.longitude)) {
-                    is Resource.Success -> {
-                        state = state.copy(
-                            weatherInfo = result.data,
-                            isLoading = false,
-                            error = null
-                        )
-                    }
+            locationTracker.getCurrentLocation().let { locationData ->
+                val location = locationData.location
+                if (location != null) {
+                    when (val result = repository.getWeatherData(location.latitude, location.longitude)) {
+                        is Resource.Success -> {
+                            state = state.copy(
+                                weatherInfo = result.data,
+                                isLoading = false,
+                                error = null
+                            )
+                        }
 
-                    is Resource.Error -> {
-                        state = state.copy(
-                            weatherInfo = null,
-                            isLoading = false,
-                            error = result.message
-                        )
+                        is Resource.Error -> {
+                            state = state.copy(
+                                weatherInfo = null,
+                                isLoading = false,
+                                error = result.message
+                            )
+                        }
                     }
+                } else {
+                    state = state.copy(
+                        isLoading = false,
+                        error = locationData.error ?: context.getString(R.string.an_error_occurred_please_try_again)
+                    )
                 }
-            } ?: run {
-                state = state.copy(
-                    isLoading = false,
-                    error = context.getString(R.string.couldn_t_retrieve_location_make_sure_to_grant_permission_and_enable_gps)
-                )
             }
         }
     }
