@@ -52,4 +52,8 @@
     <string name="request_permission">Request Permission</string>
     <string name="reload">Reload</string>
     <string name="no_matching_data_found">No matching data found.</string>
+    <string name="beginner">Beginner</string>
+    <string name="step_1_of_3_steps">Step 1 of 3 steps</string>
+    <string name="step_2_of_3_steps">Step 2 of 3 steps</string>
+    <string name="step_3_of_3_steps">Step 3 of 3 steps</string>
 </resources>

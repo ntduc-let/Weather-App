@@ -16,20 +16,20 @@ class TutorialViewModel @Inject constructor() : ViewModel() {
     fun onEvent(event: TutorialEvent) {
         when (event) {
             is TutorialEvent.NextTutorial -> {
-                when (state.value.currentTutorial.step) {
-                    Tutorial.BeginTutorial.step -> _state.value = state.value.copy(
+                when (state.value.currentTutorial) {
+                    Tutorial.BeginTutorial -> _state.value = state.value.copy(
                         currentTutorial = Tutorial.FirstTutorial,
                     )
 
-                    Tutorial.FirstTutorial.step -> _state.value = state.value.copy(
+                    Tutorial.FirstTutorial -> _state.value = state.value.copy(
                         currentTutorial = Tutorial.SecondTutorial,
                     )
 
-                    Tutorial.SecondTutorial.step -> _state.value = state.value.copy(
+                    Tutorial.SecondTutorial -> _state.value = state.value.copy(
                         currentTutorial = Tutorial.ThirdTutorial,
                     )
 
-                    Tutorial.ThirdTutorial.step -> {
+                    Tutorial.ThirdTutorial -> {
                         TutorialState.showedTutorial()
                         _state.value = state.value.copy(
                             isShowTutorial = false

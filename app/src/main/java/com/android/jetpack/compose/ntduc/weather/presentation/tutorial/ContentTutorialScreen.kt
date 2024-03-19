@@ -1,5 +1,6 @@
 package com.android.jetpack.compose.ntduc.weather.presentation.tutorial
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -42,6 +44,20 @@ fun ContentTutorialScreen(viewModel: TutorialViewModel, modifier: Modifier, onRe
             verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.fillMaxSize()
         ) {
+
+            Text(
+                text = stringResource(id = currentTutorial.titleRes),
+                textAlign = TextAlign.Center,
+                fontSize = 18.sp,
+                color = Color.White,
+                fontFamily = FontFamily.Cursive,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .animateContentSize()
+            )
+
             Image(
                 painter = painterResource(id = currentTutorial.iconRes),
                 contentDescription = null,
@@ -53,26 +69,32 @@ fun ContentTutorialScreen(viewModel: TutorialViewModel, modifier: Modifier, onRe
                 text = stringResource(id = currentTutorial.desTitleRes),
                 textAlign = TextAlign.Center,
                 fontSize = 12.sp,
+                fontFamily = FontFamily.Serif,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = 16.dp)
+                    .animateContentSize()
             )
             Text(
                 text = stringResource(id = currentTutorial.titleContentRes),
                 textAlign = TextAlign.Center,
                 fontSize = 24.sp,
                 color = Color.White,
+                fontFamily = FontFamily.Serif,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = 16.dp)
+                    .animateContentSize()
             )
             Text(
                 text = stringResource(id = currentTutorial.desContentRes),
                 textAlign = TextAlign.Center,
+                fontFamily = FontFamily.Serif,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
+                    .animateContentSize()
             )
             Spacer(modifier = Modifier.height(32.dp))
             Button(

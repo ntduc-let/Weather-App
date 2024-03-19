@@ -3,7 +3,7 @@ package com.android.jetpack.compose.ntduc.weather.domain.tutorial
 import com.android.jetpack.compose.ntduc.weather.R
 
 sealed class Tutorial(
-    val step: Int,
+    val titleRes: Int,
     val animationRes: Int,
     val iconRes: Int,
     val desTitleRes: Int,
@@ -14,7 +14,7 @@ sealed class Tutorial(
 ) {
 
     data object BeginTutorial : Tutorial(
-        step = 0,
+        titleRes = R.string.beginner,
         animationRes = R.raw.animation_begin_tutorial,
         iconRes = R.drawable.ic_begin_tutorial_24dp,
         desTitleRes = R.string.welcome,
@@ -25,7 +25,7 @@ sealed class Tutorial(
     )
 
     data object FirstTutorial : Tutorial(
-        step = 1,
+        titleRes = R.string.step_1_of_3_steps,
         animationRes = R.raw.animation_first_tutorial,
         iconRes = R.drawable.ic_first_tutorial_24dp,
         desTitleRes = R.string.terms_privacy,
@@ -36,7 +36,7 @@ sealed class Tutorial(
     )
 
     data object SecondTutorial : Tutorial(
-        step = 2,
+        titleRes = R.string.step_2_of_3_steps,
         animationRes = R.raw.animation_second_tutorial,
         iconRes = R.drawable.ic_second_tutorial_24dp,
         desTitleRes = R.string.location_permissions,
@@ -47,7 +47,7 @@ sealed class Tutorial(
     )
 
     data object ThirdTutorial : Tutorial(
-        step = 3,
+        titleRes = R.string.step_3_of_3_steps,
         animationRes = R.raw.animation_third_tutorial,
         iconRes = R.drawable.ic_third_tutorial_24dp,
         desTitleRes = R.string.notifications,
