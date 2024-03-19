@@ -4,6 +4,7 @@ import com.android.jetpack.compose.ntduc.weather.R
 
 sealed class Tutorial(
     val step: Int,
+    val animationRes: Int,
     val iconRes: Int,
     val desTitleRes: Int,
     val titleContentRes: Int,
@@ -11,8 +12,9 @@ sealed class Tutorial(
     val titleButtonRes: Int
 ) {
 
-    data object BeginTutorial: Tutorial(
+    data object BeginTutorial : Tutorial(
         step = 0,
+        animationRes = R.raw.animation_begin_tutorial,
         iconRes = R.drawable.ic_begin_tutorial_24dp,
         desTitleRes = R.string.welcome,
         titleContentRes = R.string.come_in_the_weather_is,
@@ -20,8 +22,9 @@ sealed class Tutorial(
         titleButtonRes = R.string.get_started
     )
 
-    data object FirstTutorial: Tutorial(
+    data object FirstTutorial : Tutorial(
         step = 1,
+        animationRes = R.raw.animation_first_tutorial,
         iconRes = R.drawable.ic_first_tutorial_24dp,
         desTitleRes = R.string.terms_privacy,
         titleContentRes = R.string.stay_updated_stay_safe,
@@ -29,8 +32,9 @@ sealed class Tutorial(
         titleButtonRes = R.string.agree_and_continue
     )
 
-    data object SecondTutorial: Tutorial(
+    data object SecondTutorial : Tutorial(
         step = 2,
+        animationRes = R.raw.animation_second_tutorial,
         iconRes = R.drawable.ic_second_tutorial_24dp,
         desTitleRes = R.string.location_permissions,
         titleContentRes = R.string.get_hyper_local_forecasts_wherever_you_are,
@@ -38,8 +42,9 @@ sealed class Tutorial(
         titleButtonRes = R.string.next
     )
 
-    data object ThirdTutorial: Tutorial(
+    data object ThirdTutorial : Tutorial(
         step = 3,
+        animationRes = R.raw.animation_third_tutorial,
         iconRes = R.drawable.ic_third_tutorial_24dp,
         desTitleRes = R.string.notifications,
         titleContentRes = R.string.stay_ahead_the_storm,

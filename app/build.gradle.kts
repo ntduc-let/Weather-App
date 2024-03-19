@@ -150,4 +150,7 @@ dependencies {
 
     // Hawk: https://github.com/orhanobut/hawk
     implementation(libs.hawk)
+
+    // Lottie: https://github.com/airbnb/lottie/blob/master/android-compose.md
+    implementation(libs.lottie.compose)
 }
