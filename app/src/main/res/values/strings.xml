@@ -48,4 +48,8 @@
     <string name="stay_ahead_the_storm">Stay Ahead the Storm</string>
     <string name="turn_on_notifications_to_receive_severe_weather_alerts_and_breaking_news_for_your_saved_locations_so_you_re_always_prepared">Turn on notifications to receive severe weather alerts and breaking news for your saved locations - so you\'re always prepared</string>
     <string name="we_take_tour_privacy_very_seriously_tap_the_arrow_below_to_agree_to_our_terms_of_use_and_privacy_policy_which_will_allow_you_ti_safely_enjoy_the_weather_app">We take tour privacy very seriously. Tap the arrow below to agree to our Terms of Use and Privacy Policy, which will allow you ti safely enjoy the Weather App</string>
+    <string name="enable_current_location">Enable Current Location</string>
+    <string name="request_permission">Request Permission</string>
+    <string name="reload">Reload</string>
+    <string name="no_matching_data_found">No matching data found.</string>
 </resources>

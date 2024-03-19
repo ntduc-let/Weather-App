@@ -31,7 +31,7 @@ fun WeatherCard(
 ) {
     state.weatherInfo?.let { weatherInfo ->
         val data = weatherInfo.currentWeatherData ?: return@let
-        val unit = weatherInfo.weatherUnit ?: return@let
+        val unit = weatherInfo.weatherUnit
 
         Card(
             modifier = modifier

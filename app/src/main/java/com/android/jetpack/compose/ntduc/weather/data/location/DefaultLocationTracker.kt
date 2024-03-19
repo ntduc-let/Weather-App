@@ -6,8 +6,8 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import androidx.core.content.ContextCompat
-import com.android.jetpack.compose.ntduc.weather.R
 import com.android.jetpack.compose.ntduc.weather.domain.location.LocationData
+import com.android.jetpack.compose.ntduc.weather.domain.location.LocationError
 import com.android.jetpack.compose.ntduc.weather.domain.location.LocationTracker
 import com.google.android.gms.location.FusedLocationProviderClient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -35,11 +35,11 @@ class DefaultLocationTracker @Inject constructor(
         val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) ||
                 locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         if (!hasAccessCoarseLocationPermission || !hasAccessFineLocationPermission) {
-            return LocationData(location = null, error = application.getString(R.string.couldn_t_retrieve_location_make_sure_to_grant_location_permissions))
+            return LocationData(location = null, error = LocationError.LocationPermissionError)
         }
 
         if (!isGpsEnabled) {
-            return LocationData(location = null, error = application.getString(R.string.couldn_t_retrieve_location_make_sure_gps_is_turned_on))
+            return LocationData(location = null, error = LocationError.GpsError)
         }
 
         return suspendCancellableCoroutine { cont ->
@@ -48,7 +48,7 @@ class DefaultLocationTracker @Inject constructor(
                     if (isSuccessful) {
                         cont.resume(LocationData(location = result, error = null))
                     } else {
-                        cont.resume(LocationData(location = null, error = application.getString(R.string.an_error_occurred_please_try_again)))
+                        cont.resume(LocationData(location = null, error = LocationError.OtherError(null)))
                     }
                     return@suspendCancellableCoroutine
                 }
@@ -56,7 +56,7 @@ class DefaultLocationTracker @Inject constructor(
                     cont.resume(LocationData(location = it, error = null))
                 }
                 addOnFailureListener {
-                    cont.resume(LocationData(location = null, error = application.getString(R.string.an_error_occurred_please_try_again)))
+                    cont.resume(LocationData(location = null, error = LocationError.OtherError(null)))
                 }
                 addOnCanceledListener {
                     cont.cancel()

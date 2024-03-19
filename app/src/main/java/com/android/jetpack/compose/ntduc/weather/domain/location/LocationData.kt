@@ -4,5 +4,5 @@ import android.location.Location
 
 data class LocationData(
     val location: Location?,
-    val error: String?
+    val error: LocationError?
 )
