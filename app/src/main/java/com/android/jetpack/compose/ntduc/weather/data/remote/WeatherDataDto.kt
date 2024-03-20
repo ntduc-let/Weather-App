@@ -1,5 +1,6 @@
 package com.android.jetpack.compose.ntduc.weather.data.remote
 
+import com.android.jetpack.compose.ntduc.weather.domain.weather.WeatherData
 import com.squareup.moshi.Json
 
 data class WeatherDataDto(

@@ -21,7 +21,8 @@ fun WeatherForecast(
     state: WeatherState,
     modifier: Modifier = Modifier
 ) {
-    state.weatherInfo?.weatherDataPerDay?.get(0)?.let { data ->
+    val info = state.weatherInfo
+    info?.weatherDataNext24Hour?.let { data ->
         Column(
             modifier = modifier
                 .fillMaxWidth()
@@ -36,7 +37,9 @@ fun WeatherForecast(
                 content = {
                     items(count = data.size) { index ->
                         HourlyWeatherDisplay(
+                            currentWeatherData = info.currentWeatherData,
                             weatherData = data[index],
+                            weatherUnit = info.weatherUnit,
                             modifier = Modifier
                         )
                     }
