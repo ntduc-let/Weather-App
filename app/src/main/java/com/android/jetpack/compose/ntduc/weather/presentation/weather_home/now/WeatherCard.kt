@@ -1,4 +1,4 @@
-package com.android.jetpack.compose.ntduc.weather.presentation.weather_home
+package com.android.jetpack.compose.ntduc.weather.presentation.weather_home.now
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -21,18 +21,16 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.android.jetpack.compose.ntduc.weather.R
+import com.android.jetpack.compose.ntduc.weather.domain.weather.WeatherInfo
 import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
 
 @Composable
 fun WeatherCard(
-    state: WeatherState,
+    weatherInfo: WeatherInfo?,
     modifier: Modifier = Modifier
 ) {
-    state.weatherInfo?.let { weatherInfo ->
-        val data = weatherInfo.currentWeatherData ?: return@let
-        val unit = weatherInfo.weatherUnit
-
+    weatherInfo?.currentWeatherData?.let { data ->
         Card(
             modifier = modifier
                 .padding(16.dp)
@@ -55,7 +53,7 @@ fun WeatherCard(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "${data.temperatureCelsius}${unit.temperature}",
+                    text = "${data.temperatureCelsius}${weatherInfo.weatherUnit.temperature}",
                     fontSize = 50.sp,
                 )
                 Spacer(modifier = Modifier.height(16.dp))
@@ -70,17 +68,17 @@ fun WeatherCard(
                 ) {
                     WeatherDataDisplay(
                         value = data.pressure.roundToInt(),
-                        unit = unit.pressure,
+                        unit = weatherInfo.weatherUnit.pressure,
                         icon = ImageVector.vectorResource(id = R.drawable.ic_pressure),
                     )
                     WeatherDataDisplay(
                         value = data.humidity.roundToInt(),
-                        unit = unit.humidity,
+                        unit = weatherInfo.weatherUnit.humidity,
                         icon = ImageVector.vectorResource(id = R.drawable.ic_drop),
                     )
                     WeatherDataDisplay(
                         value = data.windSpeed.roundToInt(),
-                        unit = unit.windSpeed,
+                        unit = weatherInfo.weatherUnit.windSpeed,
                         icon = ImageVector.vectorResource(id = R.drawable.ic_wind),
                     )
                 }

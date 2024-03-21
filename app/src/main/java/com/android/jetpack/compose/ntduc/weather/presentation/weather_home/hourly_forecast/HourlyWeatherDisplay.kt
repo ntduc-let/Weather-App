@@ -1,4 +1,4 @@
-package com.android.jetpack.compose.ntduc.weather.presentation.weather_home
+package com.android.jetpack.compose.ntduc.weather.presentation.weather_home.hourly_forecast
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

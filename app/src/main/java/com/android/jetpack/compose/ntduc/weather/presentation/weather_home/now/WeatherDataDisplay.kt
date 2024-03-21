@@ -1,4 +1,4 @@
-package com.android.jetpack.compose.ntduc.weather.presentation.weather_home
+package com.android.jetpack.compose.ntduc.weather.presentation.weather_home.now
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

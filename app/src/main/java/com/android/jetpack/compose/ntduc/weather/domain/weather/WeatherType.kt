@@ -7,6 +7,11 @@ sealed class WeatherType(
     val descRes: Int,
     @DrawableRes val iconRes: Int
 ) {
+    data object None : WeatherType(
+        descRes = R.string.clear_sky,
+        iconRes = R.drawable.ic_sunny
+    )
+
     data object ClearSky : WeatherType(
         descRes = R.string.clear_sky,
         iconRes = R.drawable.ic_sunny

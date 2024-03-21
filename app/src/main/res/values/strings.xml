@@ -57,4 +57,7 @@
     <string name="step_2_of_3_steps">Step 2 of 3 steps</string>
     <string name="step_3_of_3_steps">Step 3 of 3 steps</string>
     <string name="now">Now</string>
+    <string name="daily_forecast">Daily forecast</string>
+    <string name="max_s">Max: %s</string>
+    <string name="min_s">Min: %s</string>
 </resources>

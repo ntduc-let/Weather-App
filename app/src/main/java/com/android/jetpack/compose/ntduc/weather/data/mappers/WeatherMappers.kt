@@ -3,6 +3,7 @@ package com.android.jetpack.compose.ntduc.weather.data.mappers
 import com.android.jetpack.compose.ntduc.weather.data.remote.WeatherDataDto
 import com.android.jetpack.compose.ntduc.weather.data.remote.WeatherDto
 import com.android.jetpack.compose.ntduc.weather.domain.weather.WeatherData
+import com.android.jetpack.compose.ntduc.weather.domain.weather.WeatherDataMaxMin
 import com.android.jetpack.compose.ntduc.weather.domain.weather.WeatherInfo
 import com.android.jetpack.compose.ntduc.weather.domain.weather.WeatherType
 import com.android.jetpack.compose.ntduc.weather.domain.weather.WeatherUnit
@@ -45,6 +46,20 @@ fun WeatherDto.toWeatherInfo(): WeatherInfo {
         it.time.dayOfYear
     }
 
+    val weatherDataDaily = weatherDataPerDay.values.filterNot { it.isEmpty() }.map {
+        WeatherDataMaxMin(
+            time = it.first().time,
+            temperatureCelsiusMax = it.maxOf { data -> data.temperatureCelsius },
+            temperatureCelsiusMin = it.minOf { data -> data.temperatureCelsius },
+            humidityMax = it.maxOf { data -> data.humidity },
+            humidityMin = it.minOf { data -> data.humidity },
+            pressureMax = it.maxOf { data -> data.pressure },
+            pressureMin = it.minOf { data -> data.pressure },
+            windSpeedMax = it.maxOf { data -> data.windSpeed },
+            windSpeedMin = it.minOf { data -> data.windSpeed },
+        )
+    }
+
     val currentWeatherData = weatherData.find {
         var dayOfYear = now.dayOfYear
         var hour = if (now.minute < 30) now.hour else now.hour + 1
@@ -57,11 +72,13 @@ fun WeatherDto.toWeatherInfo(): WeatherInfo {
     }
 
     val currentWeatherDataIndex = weatherData.indexOf(currentWeatherData)
-    val weatherDataNext24Hour = weatherData.subList(currentWeatherDataIndex, currentWeatherDataIndex + 24)
+
+    val weatherDataHourly = weatherData.subList(currentWeatherDataIndex, currentWeatherDataIndex + 24)
 
     return WeatherInfo(
         weatherDataPerDay = weatherDataPerDay,
-        weatherDataNext24Hour = weatherDataNext24Hour,
+        weatherDataDaily = weatherDataDaily,
+        weatherDataHourly = weatherDataHourly,
         currentWeatherData = currentWeatherData,
         weatherUnit = weatherUnit
     )

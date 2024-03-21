@@ -1,4 +1,4 @@
-package com.android.jetpack.compose.ntduc.weather.presentation.weather_home
+package com.android.jetpack.compose.ntduc.weather.presentation.weather_home.hourly_forecast
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,14 +16,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.android.jetpack.compose.ntduc.weather.R
+import com.android.jetpack.compose.ntduc.weather.domain.weather.WeatherInfo
 
 @Composable
-fun WeatherForecast(
-    state: WeatherState,
+fun WeatherHourlyForecast(
+    weatherInfo: WeatherInfo?,
     modifier: Modifier = Modifier
 ) {
-    val info = state.weatherInfo
-    info?.weatherDataNext24Hour?.let { data ->
+    weatherInfo?.weatherDataHourly?.let { dataList ->
+        Spacer(modifier = Modifier.height(16.dp))
+
         Column(
             modifier = modifier
                 .fillMaxWidth()
@@ -34,19 +37,18 @@ fun WeatherForecast(
             )
             Spacer(modifier = Modifier.height(16.dp))
             LazyRow(
-                content = {
-                    items(count = data.size) { index ->
-                        HourlyWeatherDisplay(
-                            currentWeatherData = info.currentWeatherData,
-                            weatherData = data[index],
-                            weatherUnit = info.weatherUnit,
-                            modifier = Modifier
-                        )
-                    }
-                },
                 contentPadding = PaddingValues(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
-            )
+            ) {
+                items(dataList) { data ->
+                    HourlyWeatherDisplay(
+                        currentWeatherData = weatherInfo.currentWeatherData,
+                        weatherData = data,
+                        weatherUnit = weatherInfo.weatherUnit,
+                        modifier = Modifier
+                    )
+                }
+            }
         }
     }
 }
