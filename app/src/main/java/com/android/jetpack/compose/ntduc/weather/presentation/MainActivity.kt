@@ -1,14 +1,7 @@
 package com.android.jetpack.compose.ntduc.weather.presentation
 
-import android.Manifest
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -28,46 +21,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : BaseActivityPermission() {
 
     private val weatherVM: WeatherViewModel by viewModels()
     private val tutorialVM: TutorialViewModel by viewModels()
-
-    private val locationPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) {
-        tutorialVM.onEvent(TutorialEvent.NextTutorial)
-    }
-
-    private val locationPermissionAndReloadDataLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) {
-        weatherVM.loadWeatherInfo()
-    }
-
-    private val notificationPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) {
-        tutorialVM.onEvent(TutorialEvent.NextTutorial)
-    }
-
-    private val locationPermissionSettingLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        tutorialVM.onEvent(TutorialEvent.NextTutorial)
-    }
-
-    private val enableGpsSettingLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        weatherVM.loadWeatherInfo()
-    }
-
-    private val locationPermissionSettingAndReloadDataLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        weatherVM.loadWeatherInfo()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,65 +69,18 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun requestLocationPermissionAndReloadData() {
-        if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
-            || shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION)
-        ) {
-            goToLocationPermissionSettingAndReloadData()
-        } else {
-            locationPermissionAndReloadDataLauncher.launch(
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                )
-            )
-        }
+    override fun onLocationPermissionRequested() {
+        super.onLocationPermissionRequested()
+        tutorialVM.onEvent(TutorialEvent.NextTutorial)
     }
 
-    private fun requestLocationPermission() {
-        if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
-            || shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION)
-        ) {
-            goToLocationPermissionSetting()
-        } else {
-            locationPermissionLauncher.launch(
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                )
-            )
-        }
+    override fun onNotificationPermissionRequested() {
+        super.onNotificationPermissionRequested()
+        tutorialVM.onEvent(TutorialEvent.NextTutorial)
     }
 
-    private fun requestNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-        } else {
-            tutorialVM.onEvent(TutorialEvent.NextTutorial)
-        }
-    }
-
-    private fun goToLocationPermissionSetting() {
-        try {
-            locationPermissionSettingLauncher.launch(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")))
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun goToLocationPermissionSettingAndReloadData() {
-        try {
-            locationPermissionSettingAndReloadDataLauncher.launch(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")))
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun enableGps() {
-        try {
-            enableGpsSettingLauncher.launch(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+    override fun reloadWeatherInfo() {
+        super.reloadWeatherInfo()
+        weatherVM.loadWeatherInfo()
     }
 }
