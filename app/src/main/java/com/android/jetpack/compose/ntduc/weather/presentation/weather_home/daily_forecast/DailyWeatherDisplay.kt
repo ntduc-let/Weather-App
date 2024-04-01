@@ -1,5 +1,6 @@
 package com.android.jetpack.compose.ntduc.weather.presentation.weather_home.daily_forecast
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,9 +23,10 @@ import kotlin.math.roundToInt
 
 @Composable
 fun DailyWeatherDisplay(
+    modifier: Modifier = Modifier,
     weatherInfo: WeatherInfo,
     weatherData: WeatherDataMaxMin,
-    modifier: Modifier = Modifier
+    onClickDailyWeather: () -> Unit
 ) {
     val formattedTime = remember(weatherData) { weatherData.time.format(DateTimeFormatter.ofPattern("EEE dd/MM", Locale.ENGLISH)) }
 
@@ -32,6 +34,9 @@ fun DailyWeatherDisplay(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
+            .clickable {
+
+            }
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(16.dp)) {
             if (weatherInfo.currentWeatherData?.time?.dayOfYear == weatherData.time.dayOfYear) {

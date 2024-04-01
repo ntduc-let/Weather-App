@@ -5,7 +5,8 @@ import androidx.compose.foundation.lazy.items
 import com.android.jetpack.compose.ntduc.weather.domain.weather.WeatherInfo
 
 fun LazyListScope.WeatherDailyForecast(
-    weatherInfo: WeatherInfo?
+    weatherInfo: WeatherInfo?,
+    onClickDailyWeather: () -> Unit
 ) {
     val weatherDataDaily = weatherInfo?.weatherDataDaily
     if (!weatherDataDaily.isNullOrEmpty()) {
@@ -16,7 +17,7 @@ fun LazyListScope.WeatherDailyForecast(
         items(items = weatherDataDaily, key = {
             it.time
         }) { data ->
-            DailyWeatherDisplay(weatherInfo, weatherData = data)
+            DailyWeatherDisplay(weatherInfo = weatherInfo, weatherData = data, onClickDailyWeather = onClickDailyWeather)
         }
     }
 }

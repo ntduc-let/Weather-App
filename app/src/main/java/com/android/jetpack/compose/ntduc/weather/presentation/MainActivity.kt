@@ -61,6 +61,9 @@ class MainActivity : BaseActivityPermission() {
                                 onEnableGps = {
                                     enableGps()
                                 },
+                                onClickDailyWeather = {
+
+                                }
                             )
                         }
                     }
