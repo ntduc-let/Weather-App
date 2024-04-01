@@ -69,13 +69,8 @@ class MainActivity : BaseActivityPermission() {
         }
     }
 
-    override fun onLocationPermissionRequested() {
-        super.onLocationPermissionRequested()
-        tutorialVM.onEvent(TutorialEvent.NextTutorial)
-    }
-
-    override fun onNotificationPermissionRequested() {
-        super.onNotificationPermissionRequested()
+    override fun nextTutorial() {
+        super.nextTutorial()
         tutorialVM.onEvent(TutorialEvent.NextTutorial)
     }
 

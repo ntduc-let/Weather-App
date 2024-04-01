@@ -7,28 +7,25 @@ import android.os.Build
 import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
-import com.android.jetpack.compose.ntduc.weather.presentation.tutorial.TutorialEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 open class BaseActivityPermission : ComponentActivity() {
 
-    protected open fun onLocationPermissionRequested() {}
+    protected open fun nextTutorial() {}
     protected open fun reloadWeatherInfo() {}
-    protected open fun onNotificationPermissionRequested() {}
-
 
     private val locationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) {
-        onLocationPermissionRequested()
+        nextTutorial()
     }
 
     private val locationPermissionSettingLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        onLocationPermissionRequested()
+        nextTutorial()
     }
 
     private val enableGpsSettingLauncher = registerForActivityResult(
@@ -52,7 +49,7 @@ open class BaseActivityPermission : ComponentActivity() {
     private val notificationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
-        onNotificationPermissionRequested()
+        nextTutorial()
     }
 
     protected fun requestLocationPermissionAndReloadData() {
@@ -89,7 +86,7 @@ open class BaseActivityPermission : ComponentActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         } else {
-            onNotificationPermissionRequested()
+            nextTutorial()
         }
     }
 
