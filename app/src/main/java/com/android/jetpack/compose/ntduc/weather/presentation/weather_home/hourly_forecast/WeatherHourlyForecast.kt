@@ -13,6 +13,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.android.jetpack.compose.ntduc.weather.R
@@ -33,6 +35,7 @@ fun WeatherHourlyForecast(
             Text(
                 text = stringResource(R.string.hourly_forecast),
                 fontSize = 20.sp,
+                fontFamily = FontFamily.SansSerif,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
             Spacer(modifier = Modifier.height(16.dp))

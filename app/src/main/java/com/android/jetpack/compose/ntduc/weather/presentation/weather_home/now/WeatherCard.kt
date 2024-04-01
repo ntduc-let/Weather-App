@@ -14,10 +14,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.android.jetpack.compose.ntduc.weather.R
@@ -43,6 +46,9 @@ fun WeatherCard(
             ) {
                 Text(
                     text = String.format(stringResource(R.string.today_s), data.time.format(DateTimeFormatter.ofPattern("HH:mm"))),
+                    fontFamily = FontFamily.Serif,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
                     modifier = Modifier.align(Alignment.End),
                 )
                 Spacer(modifier = Modifier.height(16.dp))
@@ -55,11 +61,16 @@ fun WeatherCard(
                 Text(
                     text = "${data.temperatureCelsius}${weatherInfo.weatherUnit.temperature}",
                     fontSize = 50.sp,
+                    color = Color.White,
+                    fontFamily = FontFamily.Serif
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = stringResource(id = data.weatherType.descRes),
                     fontSize = 20.sp,
+                    color = Color.White,
+                    fontFamily = FontFamily.Serif,
+                    fontWeight = FontWeight.ExtraBold
                 )
                 Spacer(modifier = Modifier.height(32.dp))
                 Row(
