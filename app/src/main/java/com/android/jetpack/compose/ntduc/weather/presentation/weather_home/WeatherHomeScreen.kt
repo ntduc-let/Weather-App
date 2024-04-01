@@ -11,7 +11,12 @@ import com.android.jetpack.compose.ntduc.weather.presentation.weather_home.hourl
 import com.android.jetpack.compose.ntduc.weather.presentation.weather_home.now.WeatherCard
 
 @Composable
-fun WeatherHomeScreen(viewModel: WeatherViewModel, modifier: Modifier, onRequestLocationPermission: () -> Unit, onEnableGps: () -> Unit) {
+fun WeatherHomeScreen(
+    viewModel: WeatherViewModel,
+    modifier: Modifier,
+    onRequestLocationPermission: () -> Unit,
+    onEnableGps: () -> Unit
+) {
     LaunchedEffect(key1 = Unit) {
         viewModel.loadWeatherInfo()
     }

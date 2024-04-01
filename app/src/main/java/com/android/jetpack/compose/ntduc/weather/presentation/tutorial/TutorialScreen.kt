@@ -7,7 +7,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun TutorialScreen(viewModel: TutorialViewModel, modifier: Modifier, onRequestLocationPermission: () -> Unit, onRequestNotificationPermission: () -> Unit) {
+fun TutorialScreen(
+    viewModel: TutorialViewModel,
+    modifier: Modifier,
+    onRequestLocationPermission: () -> Unit,
+    onRequestNotificationPermission: () -> Unit
+) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,

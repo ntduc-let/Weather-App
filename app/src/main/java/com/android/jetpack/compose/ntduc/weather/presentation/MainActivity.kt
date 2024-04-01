@@ -37,6 +37,11 @@ class MainActivity : ComponentActivity() {
         ActivityResultContracts.RequestMultiplePermissions()
     ) {
         tutorialVM.onEvent(TutorialEvent.NextTutorial)
+    }
+
+    private val locationPermissionAndReloadDataLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) {
         weatherVM.loadWeatherInfo()
     }
 
@@ -50,6 +55,17 @@ class MainActivity : ComponentActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) {
         tutorialVM.onEvent(TutorialEvent.NextTutorial)
+    }
+
+    private val enableGpsSettingLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        weatherVM.loadWeatherInfo()
+    }
+
+    private val locationPermissionSettingAndReloadDataLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
         weatherVM.loadWeatherInfo()
     }
 
@@ -83,7 +99,7 @@ class MainActivity : ComponentActivity() {
                                 viewModel = weatherVM,
                                 modifier = Modifier.fillMaxSize(),
                                 onRequestLocationPermission = {
-                                    requestLocationPermission()
+                                    requestLocationPermissionAndReloadData()
                                 },
                                 onEnableGps = {
                                     enableGps()
@@ -93,6 +109,21 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun requestLocationPermissionAndReloadData() {
+        if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
+            || shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION)
+        ) {
+            goToLocationPermissionSettingAndReloadData()
+        } else {
+            locationPermissionAndReloadDataLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                )
+            )
         }
     }
 
@@ -127,9 +158,17 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun goToLocationPermissionSettingAndReloadData() {
+        try {
+            locationPermissionSettingAndReloadDataLauncher.launch(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun enableGps() {
         try {
-            locationPermissionSettingLauncher.launch(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            enableGpsSettingLauncher.launch(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
         } catch (e: Exception) {
             e.printStackTrace()
         }

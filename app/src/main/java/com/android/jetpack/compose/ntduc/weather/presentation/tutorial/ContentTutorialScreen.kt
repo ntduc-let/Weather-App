@@ -33,7 +33,12 @@ import androidx.compose.ui.unit.sp
 import com.android.jetpack.compose.ntduc.weather.domain.tutorial.TutorialAction
 
 @Composable
-fun ContentTutorialScreen(viewModel: TutorialViewModel, modifier: Modifier, onRequestLocationPermission: () -> Unit, onRequestNotificationPermission: () -> Unit) {
+fun ContentTutorialScreen(
+    viewModel: TutorialViewModel,
+    modifier: Modifier,
+    onRequestLocationPermission: () -> Unit,
+    onRequestNotificationPermission: () -> Unit
+) {
     Card(
         shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
         modifier = modifier,

@@ -10,7 +10,10 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 
 @Composable
-fun AnimationTutorialScreen(rawRes: Int, modifier: Modifier) {
+fun AnimationTutorialScreen(
+    rawRes: Int,
+    modifier: Modifier
+) {
     val animationComposition by rememberLottieComposition(LottieCompositionSpec.RawRes(rawRes))
     LottieAnimation(
         composition = animationComposition,
