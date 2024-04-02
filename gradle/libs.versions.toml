@@ -1,9 +1,6 @@
 [versions]
 compileSdkVersion = "34"
-hawk = "2.0.1"
-lottieCompose = "6.1.0"
 minSdkVersion = "24"
-navigationCompose = "2.7.7"
 targetSdkVersion = "34"
 
 agp = "8.3.1"
@@ -14,14 +11,17 @@ junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.8.2"
-composeBom = "2024.02.02"
+composeBom = "2024.03.00"
 ksp = "1.9.22-1.0.17"
 hiltAndroid = "2.51"
 retrofit = "2.9.0"
 okhttpBom = "4.12.0"
 desugar_jdk_libs = "2.0.4"
 playServicesLocation = "21.2.0"
-firebase-bom = "32.7.4"
+firebase-bom = "32.8.0"
+hawk = "2.0.1"
+lottieCompose = "6.1.0"
+navigationCompose = "2.7.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -44,6 +44,7 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-material = { group = "androidx.compose.material", name = "material" }
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
