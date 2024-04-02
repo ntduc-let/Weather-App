@@ -23,4 +23,6 @@ fun TitleWeatherDailyForecast() {
         modifier = Modifier.padding(horizontal = 16.dp),
         fontFamily = FontFamily.SansSerif,
     )
+
+    Spacer(modifier = Modifier.height(8.dp))
 }

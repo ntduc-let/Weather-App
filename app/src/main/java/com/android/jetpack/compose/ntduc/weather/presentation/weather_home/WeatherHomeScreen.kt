@@ -17,7 +17,7 @@ import com.android.jetpack.compose.ntduc.weather.presentation.weather_home.now.W
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun WeatherHomeScreen(
-    viewModel: WeatherViewModel,
+    viewModel: WeatherHomeViewModel,
     modifier: Modifier,
     onRequestLocationPermission: () -> Unit,
     onEnableGps: () -> Unit,

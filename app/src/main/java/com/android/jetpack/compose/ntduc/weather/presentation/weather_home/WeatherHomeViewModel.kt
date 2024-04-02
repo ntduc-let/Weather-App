@@ -10,17 +10,16 @@ import com.android.jetpack.compose.ntduc.weather.domain.location.LocationTracker
 import com.android.jetpack.compose.ntduc.weather.domain.repository.WeatherRepository
 import com.android.jetpack.compose.ntduc.weather.domain.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class WeatherViewModel @Inject constructor(
+class WeatherHomeViewModel @Inject constructor(
     private val repository: WeatherRepository,
     private val locationTracker: LocationTracker
 ) : ViewModel() {
 
-    var state by mutableStateOf(WeatherState())
+    var state by mutableStateOf(WeatherHomeState())
         private set
 
     fun loadWeatherInfo() {
