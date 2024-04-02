@@ -61,10 +61,14 @@ class MainActivity : BaseActivityPermission() {
                                 onEnableGps = {
                                     enableGps()
                                 },
-                                onClickDailyWeather = {
+                                onClickDailyWeather = { dayOfYear ->
 
                                 }
                             )
+                        }
+
+                        composable(route = Screen.WeatherDailyScreen.route) {
+
                         }
                     }
                 }

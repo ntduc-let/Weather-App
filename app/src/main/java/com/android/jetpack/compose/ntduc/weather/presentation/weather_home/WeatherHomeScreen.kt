@@ -21,7 +21,7 @@ fun WeatherHomeScreen(
     modifier: Modifier,
     onRequestLocationPermission: () -> Unit,
     onEnableGps: () -> Unit,
-    onClickDailyWeather: () -> Unit
+    onClickDailyWeather: (Int) -> Unit
 ) {
     LaunchedEffect(key1 = Unit) {
         viewModel.loadWeatherInfo()

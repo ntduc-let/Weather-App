@@ -26,7 +26,7 @@ fun DailyWeatherDisplay(
     modifier: Modifier = Modifier,
     weatherInfo: WeatherInfo,
     weatherData: WeatherDataMaxMin,
-    onClickDailyWeather: () -> Unit
+    onClickDailyWeather: (Int) -> Unit
 ) {
     val formattedTime = remember(weatherData) { weatherData.time.format(DateTimeFormatter.ofPattern("EEE dd/MM", Locale.ENGLISH)) }
 
@@ -35,7 +35,7 @@ fun DailyWeatherDisplay(
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
             .clickable {
-
+                onClickDailyWeather.invoke(weatherData.time.dayOfYear)
             }
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(16.dp)) {
